@@ -1,0 +1,14 @@
+<div class="login-page">
+  <div class="login-card">
+    <h1 class="login-card__app-name">{{ labels.appName }}</h1>
+
+    @if (authState() === "initializing") {
+      <p class="login-card__status">{{ labels.loadingMessage }}</p>
+    } @else if (authState() === "error") {
+      <p class="login-card__status login-card__status--error">{{ labels.errorMessage }}</p>
+      <button class="login-card__button" (click)="onLogin()">{{ labels.loginButton }}</button>
+    } @else {
+      <button class="login-card__button" (click)="onLogin()">{{ labels.loginButton }}</button>
+    }
+  </div>
+</div>

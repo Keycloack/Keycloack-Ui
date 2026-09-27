@@ -1,0 +1,5 @@
+<h1>Protected Home</h1>
+@if (user(); as u) {
+  <p>Welcome, {{ u.username }} ({{ u.email }})</p>
+}
+<button (click)="logout()">Logout</button>

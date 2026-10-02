@@ -1,13 +1,10 @@
 import { inject } from '@angular/core';
-import { Router } from '@angular/router';
 import type { CanActivateFn } from '@angular/router';
 import { AuthGuardData, createAuthGuard } from 'keycloak-angular';
+import { AuthService } from './auth.service';
 
 /**
- * Protects a route: if the user is not authenticated, redirect them
- * to our own Angular /login page (which then lets the user trigger
- * Keycloak login explicitly via a button) instead of silently
- * auto-redirecting to Keycloak.
+ * Protects a route and sends unauthenticated users directly to Keycloak.
  */
 const isAccessAllowed = async (_route: unknown, _state: unknown, authData: AuthGuardData) => {
   const { authenticated } = authData;
@@ -16,8 +13,8 @@ const isAccessAllowed = async (_route: unknown, _state: unknown, authData: AuthG
     return true;
   }
 
-  const router = inject(Router);
-  return router.parseUrl('/login');
+  void inject(AuthService).login();
+  return false;
 };
 
 export const authGuard: CanActivateFn = createAuthGuard(isAccessAllowed);

@@ -1,14 +1,125 @@
 <div class="login-page">
-  <div class="login-card">
-    <h1 class="login-card__app-name">{{ labels.appName }}</h1>
+  <!-- Left: Rotating wallpaper -->
+  <section class="wallpaper-panel">
+    <div class="wallpaper-overlay"></div>
 
-    @if (authState() === "initializing") {
-      <p class="login-card__status">{{ labels.loadingMessage }}</p>
-    } @else if (authState() === "error") {
-      <p class="login-card__status login-card__status--error">{{ labels.errorMessage }}</p>
-      <button class="login-card__button" (click)="onLogin()">{{ labels.loginButton }}</button>
-    } @else {
-      <button class="login-card__button" (click)="onLogin()">{{ labels.loginButton }}</button>
-    }
-  </div>
+    <div class="wallpaper-content">
+      <div class="brand-mark">◆</div>
+
+      <h1>Welcome</h1>
+      <p>Secure access to your workspace.</p>
+    </div>
+
+    <div class="wallpaper-indicator" aria-hidden="true">
+      <span class="active"></span>
+      <span></span>
+      <span></span>
+    </div>
+  </section>
+
+  <!-- Right: Login -->
+  <section class="login-panel">
+    <div class="login-container">
+
+      <div class="login-header">
+        <h2>Welcome back</h2>
+        <p>Sign in to continue</p>
+      </div>
+
+      <form
+        class="login-form"
+        (ngSubmit)="onLogin()"
+      >
+
+        <!-- Username -->
+        <div class="form-group">
+          <label for="username">
+            Username
+          </label>
+
+          <div class="input-wrapper">
+            <span
+              class="input-icon"
+              aria-hidden="true">
+              ◉
+            </span>
+
+            <input
+              id="username"
+              name="username"
+              type="text"
+              placeholder="Enter your username"
+              autocomplete="username"
+            />
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+          <label for="password">
+            Password
+          </label>
+
+          <div class="input-wrapper">
+            <span
+              class="input-icon"
+              aria-hidden="true">
+              ●
+            </span>
+
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+            />
+
+            <button
+              type="button"
+              class="password-toggle"
+              aria-label="Show password"
+            >
+              ◉
+            </button>
+          </div>
+        </div>
+
+        <!-- Form options -->
+        <div class="form-options">
+          <label class="remember-me">
+            <input
+              type="checkbox"
+              name="rememberMe"
+            />
+
+            <span>Remember me</span>
+          </label>
+
+          <a href="#" (click)="$event.preventDefault()">
+            Forgot password?
+          </a>
+        </div>
+
+        <!-- Login -->
+        <button
+          type="submit"
+          class="login-button"
+        >
+          <span>{{ labels.loginButton }}</span>
+          <span
+            class="arrow"
+            aria-hidden="true">
+            →
+          </span>
+        </button>
+
+      </form>
+
+      <div class="login-footer">
+        <p>Secure authentication</p>
+      </div>
+
+    </div>
+  </section>
 </div>

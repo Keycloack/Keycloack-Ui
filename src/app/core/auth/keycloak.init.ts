@@ -1,12 +1,12 @@
-import { provideKeycloak, withAutoRefreshToken, AutoRefreshTokenService, UserActivityService } from 'keycloak-angular';
+import {
+  AutoRefreshTokenService,
+  provideKeycloak,
+  UserActivityService,
+  withAutoRefreshToken
+} from 'keycloak-angular';
+
 import { environment } from '../../../environments/environment';
 
-/**
- * Builds the Keycloak provider configuration for this application.
- * This is the ONLY place Keycloak connection/init details live.
- * AuthService, guards, and the interceptor consume Keycloak via
- * Angular DI � they never configure it themselves.
- */
 export const provideKeycloakAngular = () =>
   provideKeycloak({
     config: {
@@ -16,7 +16,8 @@ export const provideKeycloakAngular = () =>
     },
     initOptions: {
       onLoad: 'check-sso',
-      silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
+      silentCheckSsoRedirectUri:
+        `${window.location.origin}/silent-check-sso.html`,
       checkLoginIframe: false
     },
     features: [
@@ -25,5 +26,8 @@ export const provideKeycloakAngular = () =>
         sessionTimeout: 300000
       })
     ],
-    providers: [AutoRefreshTokenService, UserActivityService]
+    providers: [
+      AutoRefreshTokenService,
+      UserActivityService
+    ]
   });

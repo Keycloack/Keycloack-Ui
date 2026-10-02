@@ -1,51 +1,468 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100vh;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 .login-page {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/* =========================
+   LEFT WALLPAPER PANEL
+   ========================= */
+
+.wallpaper-panel {
+  position: relative;
+  width: 55%;
+  height: 100%;
+  overflow: hidden;
+
+  background-image: url('/assets/wallpapers/wallpaper-1.jpg');
+  background-size: cover;
+  background-position: center;
+
+  animation: wallpaperChange 15s infinite;
+}
+
+.wallpaper-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.65),
+    rgba(0, 0, 0, 0.25)
+  );
+}
+
+.wallpaper-content {
+  position: absolute;
+  left: 60px;
+  bottom: 100px;
+  z-index: 2;
+
+  color: #ffffff;
+}
+
+.brand-mark {
+  width: 48px;
+  height: 48px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  background: #f5f6f8;
+
+  margin-bottom: 24px;
+
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.15);
+
+  backdrop-filter: blur(10px);
+
+  font-size: 22px;
 }
 
-.login-card {
+.wallpaper-content h1 {
+  margin: 0 0 12px;
+
+  font-size: 48px;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+.wallpaper-content p {
+  margin: 0;
+
+  font-size: 17px;
+  font-weight: 300;
+
+  opacity: 0.85;
+}
+
+.wallpaper-indicator {
+  position: absolute;
+  left: 60px;
+  bottom: 45px;
+
+  display: flex;
+  gap: 8px;
+
+  z-index: 2;
+}
+
+.wallpaper-indicator span {
+  width: 28px;
+  height: 3px;
+
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.4);
+
+  transition: width 0.3s ease;
+}
+
+.wallpaper-indicator span.active {
+  width: 45px;
   background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
-  padding: 48px 40px;
+}
+
+/* =========================
+   RIGHT LOGIN PANEL
+   ========================= */
+
+.login-panel {
+  width: 45%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px;
+
+  background: #ffffff;
+}
+
+.login-container {
   width: 100%;
-  max-width: 360px;
+  max-width: 430px;
+}
+
+/* =========================
+   HEADER
+   ========================= */
+
+.login-header {
+  margin-bottom: 38px;
+}
+
+.login-header h2 {
+  margin: 0 0 10px;
+
+  color: #171717;
+
+  font-size: 34px;
+  font-weight: 650;
+  letter-spacing: -0.8px;
+}
+
+.login-header p {
+  margin: 0;
+
+  color: #737373;
+  font-size: 15px;
+}
+
+/* =========================
+   FORM
+   ========================= */
+
+.login-form {
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 23px;
+}
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: #292929;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input-wrapper input {
+  width: 100%;
+  height: 54px;
+
+  padding: 0 48px;
+
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+
+  outline: none;
+
+  color: #202020;
+  background: #ffffff;
+
+  font-size: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.input-wrapper input::placeholder {
+  color: #a5a5a5;
+}
+
+.input-wrapper input:focus {
+  border-color: #222222;
+
+  box-shadow:
+    0 0 0 3px rgba(0, 0, 0, 0.06);
+}
+
+.input-icon {
+  position: absolute;
+
+  left: 18px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: #8a8a8a;
+
+  font-size: 13px;
+
+  pointer-events: none;
+}
+
+/* =========================
+   PASSWORD TOGGLE
+   ========================= */
+
+.password-toggle {
+  position: absolute;
+
+  right: 12px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 6px;
+
+  background: transparent;
+
+  color: #8a8a8a;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.password-toggle:hover {
+  color: #333333;
+  background: #f5f5f5;
+}
+
+.password-toggle:focus-visible {
+  outline: 2px solid #171717;
+  outline-offset: 2px;
+}
+
+/* =========================
+   OPTIONS
+   ========================= */
+
+.form-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 4px 0 28px;
+
+  font-size: 13px;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  color: #666666;
+
+  cursor: pointer;
+}
+
+.remember-me input {
+  width: 15px;
+  height: 15px;
+
+  cursor: pointer;
+}
+
+.form-options a {
+  color: #333333;
+
+  text-decoration: none;
+
+  font-weight: 500;
+}
+
+.form-options a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   LOGIN BUTTON
+   ========================= */
+
+.login-button {
+  position: relative;
+
+  width: 100%;
+  height: 54px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 10px;
+
+  background: #171717;
+  color: #ffffff;
+
+  font-size: 15px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.login-button .arrow {
+  position: absolute;
+
+  right: 20px;
+
+  font-size: 19px;
+
+  transition: transform 0.2s ease;
+}
+
+.login-button:hover {
+  background: #2c2c2c;
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.login-button:hover .arrow {
+  transform: translateX(4px);
+}
+
+.login-button:active {
+  transform: scale(0.99);
+}
+
+.login-button:focus-visible {
+  outline: 2px solid #171717;
+  outline-offset: 3px;
+}
+
+/* =========================
+   FOOTER
+   ========================= */
+
+.login-footer {
+  margin-top: 32px;
+
   text-align: center;
+}
 
-  &__app-name {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 24px;
-    color: #1a1a1a;
+.login-footer p {
+  margin: 0;
+
+  color: #a0a0a0;
+
+  font-size: 12px;
+}
+
+/* =========================
+   WALLPAPER ANIMATION
+   ========================= */
+
+@keyframes wallpaperChange {
+  0%,
+  30% {
+    background-image: url('/assets/wallpapers/wallpaper-1.jpg');
   }
 
-  &__status {
-    font-size: 0.95rem;
-    color: #555;
-    margin-bottom: 20px;
-
-    &--error {
-      color: #c62828;
-    }
+  33%,
+  63% {
+    background-image: url('/assets/wallpapers/wallpaper-2.jpg');
   }
 
-  &__button {
+  66%,
+  96% {
+    background-image: url('/assets/wallpapers/wallpaper-3.jpg');
+  }
+
+  100% {
+    background-image: url('/assets/wallpapers/wallpaper-1.jpg');
+  }
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 900px) {
+  .wallpaper-panel {
+    width: 45%;
+  }
+
+  .login-panel {
+    width: 55%;
+  }
+
+  .wallpaper-content {
+    left: 35px;
+  }
+
+  .wallpaper-indicator {
+    left: 35px;
+  }
+}
+
+@media (max-width: 700px) {
+  .wallpaper-panel {
+    display: none;
+  }
+
+  .login-panel {
     width: 100%;
-    padding: 12px 0;
-    border: none;
-    border-radius: 8px;
-    background: #1a73e8;
-    color: #fff;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.15s ease;
+    padding: 25px;
+  }
 
-    &:hover {
-      background: #1558b0;
-    }
+  .login-container {
+    max-width: 420px;
   }
 }
